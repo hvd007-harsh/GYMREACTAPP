@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { Navbar } from './Components/Nav/Navbar';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Protected from './utils/Protected';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Cart from './Components/Cart/Cart';
+import Login from './Components/User/Login';
 
+// In private route first is children then other is path BASICALLY LIKE ROUTE 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Navbar/>
+    <BrowserRouter>
+      <Routes>
+        <Route element={ <Dashboard />} exact path="/" />  
+        <Route element={<Protected Component={Cart}/>} path="/cart"/>
+        <Route element={<Login/>} path={"/login"}/>
+      </Routes>
+     
+    </BrowserRouter>
+
+    </>
   );
 }
 
