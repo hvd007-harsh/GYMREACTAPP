@@ -9,7 +9,6 @@ const db = require('./db/db');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 dotenv.config();
-const qs = require('qs');
 
 
 const PORT = 5000;

@@ -16,7 +16,7 @@ function sendrefreshtoken(res,refreshtoken){
     res.cookie('refreshtoken',refreshtoken,{
         httpOnly:true,
         path:'/user/refresh_token',
-        maxAge:900000000
+        maxAge:900000
     })
 }
 

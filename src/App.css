@@ -1,7 +1,12 @@
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
 }
 body{
     min-width: 100vw;

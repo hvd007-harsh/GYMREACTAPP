@@ -28,7 +28,7 @@ export const Navbar = () => {
            <div className="dropdown">
             <button className="dropbtn">Shop with us</button>
             <div className="dropdown-content">
-              <a href="/cart_list" className="anchor">Cart </a>
+              <a href="/cart" className="anchor">Cart </a>
               <a href="*" className="anchor">Link 2</a>
               <a href="*" className="anchor">Link 3</a>
             </div>
@@ -42,12 +42,12 @@ export const Navbar = () => {
      
       
     </nav>
-    {open ?<div className="ul burger-open open">
+    {open ?<div className="ul burger-open bg-gray-dark open">
           <div className="li">
            <div className="dropdown">
             <button className="dropbtn">Shop with me </button>
             <div className="dropdown-content">
-              <a href="cart_list" className="anchor">Cart</a>
+              <a href="/cart" className="anchor">Cart</a>
               <a href="*" className="anchor">Link 2</a>
               <a href="*" className="anchor">Link 3</a>
             </div>

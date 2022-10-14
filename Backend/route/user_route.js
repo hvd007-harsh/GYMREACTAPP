@@ -14,9 +14,8 @@ Route.post("/login", async (req, res, next) => {
   try {
     req.user = req.body;
     const { email, password } = req.user;
-
     var val = validate(req, res, next);
-
+     console.log(val);
     if (val.isValid) {
       const User = await user.findOne({
         email
@@ -43,7 +42,7 @@ Route.post("/login", async (req, res, next) => {
       sendaccesstoken(req, res, Accesstoken);
     }
   } catch (error) {
-    console.log(error);
+    res.send(error);
   }
 });
 Route.post("/register", async (req, res, next) => {
@@ -53,7 +52,7 @@ Route.post("/register", async (req, res, next) => {
     name = name.trim();
     email = email.trim();
     password = password.trim();
-    confirmpassword = confirmpassword.trim();
+    confirmpassword.trim();
 
     var val = validate(req, res, next);
 
