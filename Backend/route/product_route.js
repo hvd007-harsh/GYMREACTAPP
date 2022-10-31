@@ -33,7 +33,6 @@ Router.post('/product',(req,res)=>{
 })
 
 Router.post("/product/submit",async(req,res)=>{
-
     upload(req,res,async(err)=>{
         if(err instanceof multer.MulterError){
             res.send(err.message);
@@ -91,11 +90,23 @@ Router.post("/product/submit",async(req,res)=>{
         }
     })
 })
+Router.get("/product/all",async(req,res)=>{
+  try{
+    const userId = isAuth(req);
+    if(userId){
+    const allproduct = await product.find({});
+    console.log(allproduct);
+    res.send(allproduct);
+    }
+  }catch(err){
+    console.log(err);
+  }
+})
 
 Router.get("/:product_name",async(req,res)=>{
     const product_name = req.params.product_name;
        const product_data =await product.find({title: {$regex:`(?-i)${product_name}` }});
-   res.send(product_data);
+   res.send(product_data[0]);
 
 })
 Router.put("/update",(req,res)=>{

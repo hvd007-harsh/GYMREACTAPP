@@ -2,6 +2,11 @@
 @tailwind base;
 @tailwind utilities;
 
+:root{
+    --blue:#1e1eff;
+    --ui-c-bl:#5454eb98;
+}
+
 body{
     background-image: linear-gradient(toright,#ee2333,#343434,#434344);
 }

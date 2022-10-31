@@ -3,6 +3,9 @@ const user = require("../model/usermodel");
 const validate = require("../utils/Validator");
 const isAuth = require("../utils/isauth");
 const { hash, compare } = require("bcrypt");
+
+//ALL TOKENS ARE THERE 
+
 const {
   accesstokengen,
   refreshtokengen,
@@ -10,12 +13,17 @@ const {
   sendrefreshtoken,
 } = require("../utils/tokengen");
 const { verify } = require("jsonwebtoken");
+
+
+//Log in Route
+
 Route.post("/login", async (req, res, next) => {
   try {
     req.user = req.body;
     const { email, password } = req.user;
     var val = validate(req, res, next);
-     console.log(val);
+    console.log(val.errors)
+     if(val.errors){ throw new Error (val.errors)}
     if (val.isValid) {
       const User = await user.findOne({
         email
@@ -42,9 +50,13 @@ Route.post("/login", async (req, res, next) => {
       sendaccesstoken(req, res, Accesstoken);
     }
   } catch (error) {
-    res.send(error);
+    res.send({message:error.message});
   }
 });
+
+//Register Route
+
+
 Route.post("/register", async (req, res, next) => {
   try {
     req.user = req.body;
@@ -52,7 +64,8 @@ Route.post("/register", async (req, res, next) => {
     name = name.trim();
     email = email.trim();
     password = password.trim();
-    confirmpassword.trim();
+     //eslint-disable-next-line
+    confirmpassword =confirmpassword.trim();
 
     var val = validate(req, res, next);
 
@@ -62,30 +75,27 @@ Route.post("/register", async (req, res, next) => {
       });
 
       if (User[0]) {
-        res.send({
-          status: 401,
-        });
         throw new Error("User already exist");
+
       }
 
-      password = await hash(password, 10);
-      user.create(
-        {
-          name,
-          email,
-          Password: password,
-        },
-        () => {
-          res.send({
-            status: 201,
-          });
-        }
-      );
+      const Password = await hash(password, 10);
+      console.log(Password);
+      const data = new user({name,email,Password});
+      await data.save();
+
+      res.send({
+        status: 201,
+        message:"Succesfully Register",
+        success:true
+      });
     }
   } catch (error) {
-    console.log(error);
+    res.send({message:error.message});
   }
 });
+
+//Logout Route 
 
 Route.post("/logout", (req, res) => {
   res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
@@ -93,15 +103,19 @@ Route.post("/logout", (req, res) => {
     message: "LogOut",
   });
 });
+
+//Refresh Token Route
+
+
 Route.post("/refresh_token", async (req, res) => {
   
   try{
     let token = req.cookies.refreshtoken;
-
+    console.log(token);
     if (!token) return res.send({ accesstoken: "" });
     let payload = null;
     payload = verify(token, process.env.REFRESH_SECRET);
-
+    
     console.log(payload);
 
     const User = await user.findById(payload.userId);
@@ -137,10 +151,13 @@ Route.post("/makeofgymwebsiteadmin", async(req, res) => {
       await User.save();
       res.send({
         message: `Role is set to admin`,
+        admin: true
       });
     }
   } catch (err) {
-    res.send(err.message);
+    err.admin= false;
+    err.message =" ERROR OF LOGIN 501"
+    res.send(err);
   }
 });
 

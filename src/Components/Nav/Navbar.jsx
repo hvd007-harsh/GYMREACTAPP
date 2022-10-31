@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import{RiShoppingCart2Fill} from 'react-icons/ri';
+import { Link } from "react-router-dom";
+
 import "./Navbar.css";
 export const Navbar = () => {
 
@@ -10,9 +12,9 @@ export const Navbar = () => {
       <div className="navbrand">NAVBRAND</div>
       <div className="navelement"></div>
       <div className="icon">
-        <a href="/cart">
+        <Link to={"cart"}>
         <RiShoppingCart2Fill className="icon_cart"/>
-        </a>
+        </Link>
         <hr />
       </div>
       
@@ -28,15 +30,16 @@ export const Navbar = () => {
            <div className="dropdown">
             <button className="dropbtn">Shop with us</button>
             <div className="dropdown-content">
-              <a href="/cart" className="anchor">Cart </a>
-              <a href="*" className="anchor">Link 2</a>
-              <a href="*" className="anchor">Link 3</a>
+              <Link to={"/cart"}  >Cart </Link>
+              <Link to={"*"}  >Link 2</Link>
+              <Link to={"*"}  >Link 3</Link>
             </div>
           </div>
           </div>
-          <div className="li"><a className="anchor" href="/Contact"> Contact</a></div>
-          <div className="li"><a className="anchor" href="/Membership">Membership </a> </div>
-          <div className="li"><a className="anchor" href="/Order"> TrackOrder </a></div>
+          <div className="li"><Link to={"/Contact"}> Contact</Link></div>
+          <div className="li"><Link to={"/Membership"}>Membership </Link> </div>
+          <div className="li"><Link   to={"/Order"}> TrackOrder </Link></div>
+          <div className="li"><Link   to={"/Logout"}> Logout </Link></div>
       </div>
 
      
@@ -47,15 +50,16 @@ export const Navbar = () => {
            <div className="dropdown">
             <button className="dropbtn">Shop with me </button>
             <div className="dropdown-content">
-              <a href="/cart" className="anchor">Cart</a>
-              <a href="*" className="anchor">Link 2</a>
-              <a href="*" className="anchor">Link 3</a>
+              <Link to={"/cart"}  >Cart</Link>
+              <Link to={"*"}  >Link 2</Link>
+              <Link to={"*"}  >Link 3</Link>
             </div>
           </div>
           </div>
-          <div className="li"><a className="anchor" href="/Contact"> Contact</a></div>
-          <div className="li"><a className="anchor" href="/Membership">Membership </a> </div>
-          <div className="li"><a className="anchor" href="/Order"> TrackOrder </a></div>
+          <div className="li"><Link   to={"/Contact"}> Contact</Link></div>
+          <div className="li"><Link   to={"/Membership"}>Membership </Link> </div>
+          <div className="li"><Link   to={"/Order"}> TrackOrder </Link></div>
+          <div className="li"><Link   to={"/Logout"}> Logout </Link></div>
       </div>: <div></div>}
 
     </>

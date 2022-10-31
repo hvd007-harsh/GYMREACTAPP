@@ -8,7 +8,6 @@ const {ObjectId} = require('mongodb');
 Route.get('/add_cart',async(req,res)=>{
 try{
     const userId = isAuth(req);
-    console.log(userId);
     if(userId === null){
         throw new Error("Please Login before adding the cart");
     }

@@ -4,7 +4,7 @@ const isempty = require('is-empty');
 
 module.exports = function (req,res,next) {
 
-    let errors = {};
+    let errors = null;
 
     req.user.name = !(isempty(req.user.name)) ? req.user.name : "";
     req.user.password = !(isempty(req.user.password))? req.user.password: "";

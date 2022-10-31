@@ -1,9 +1,36 @@
 import './User.css';
 
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import { useState } from 'react';
+import Axios from '../../utils/AxiosInstance';
+
 
 const Register = ()=>{
+  const navigate = useNavigate();
+  const [message, setmessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  
+  const submit = ()=>{
+    const user ={
+      name,
+      email,
+      password,
+      confirmpassword
+    };
+   const data =  Axios.post('/user/register',user);
+   data.then(response =>{
+    console.log(response.data);
+    setmessage(response.data.message);
+    if(response.data.success){
+      navigate('/login');   
+    }
+  })
+  }
+
     return(
         <>
             <section className="h-full gradient-form bg-gray-200 md:h-screen">
@@ -47,7 +74,9 @@ const Register = ()=>{
                         <input
                           type={"text"}
                           name={"username"}
+                          value={name}
                           placeholder="Username"
+                          onChange={(e)=>{setName(e.target.value)}}
                           id="exampleFormControlInput1"
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
                         />
@@ -57,6 +86,8 @@ const Register = ()=>{
                           type={"email"}
                           name={"email"}
                           placeholder="Email"
+                          value={email}
+                          onChange={(e)=>{setEmail(e.target.value)}}
                           id="exampleFormControlInput1"
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
                         />
@@ -64,6 +95,8 @@ const Register = ()=>{
                       <div class="mb-4">
                         <input
                           type="password"
+                          value={confirmpassword}
+                          onChange={(e)=>{setConfirmPassword(e.target.value)}}
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
                           id="exampleFormControlInput1"
                           placeholder="Confirm Password"
@@ -72,6 +105,8 @@ const Register = ()=>{
                       <div class="mb-4">
                         <input
                           type="password"
+                          value={password}
+                          onChange={(e)=>{setPassword(e.target.value)}}
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
                           id="exampleFormControlInput1"
                           placeholder="Password"
@@ -81,13 +116,14 @@ const Register = ()=>{
                         className="inline-block px-6 py-2 5 text-gray-light font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out lg:w-6/12 mb-3"
                         type="button"
                         data-mdb-ripple={true}
+                        onClick={submit}
                         data-mdb-ripple-color="light"
                         style={{
                           backgroundImage:
                             "linear-gradient(to right,#07bfed,#e207ed,#07bfed)",
                         }}
                       >
-                        LogIn
+                       Register
                       </button>
 
                       <div>
@@ -98,14 +134,15 @@ const Register = ()=>{
                         <Link className="ref p-1 m-0.5 cursor-pointer lg:w-6/12 bg-gray-light rounded-md hover:bg-opacity-5" to="/login">Login</Link>
                       </div>
                       <br />
-                      {/* <button
+                     {message? 
+                      <button
                         type="button"
-                        className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                        className="shake inline-block px-6 py-2 border-2 border-r-gray-dark text-gray-dark animate-bounce font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 hover:animate-pulse focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
                       >
-                        Danger
-                      </button> */}
+                        {message}
+                      </button>: null}
                     </form>
                   
                   </div>
