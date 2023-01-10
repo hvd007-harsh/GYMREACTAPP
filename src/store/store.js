@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tokenReducer from './createSlice';
+import {authReducer,cartReducer} from './createSlice';
 import sessionStorage from 'redux-persist/lib/storage/session';
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import { persistReducer, persistStore,getStoredState} from "redux-persist";
@@ -12,7 +12,7 @@ const persistConfig = {
     stateReconciler: autoMergeLevel1
 }
 
-const persistedReducer = persistReducer(persistConfig, tokenReducer);
+const persistedReducer = persistReducer(persistConfig, authReducer,cartReducer);
 
 
 export const store = configureStore({
@@ -20,7 +20,7 @@ export const store = configureStore({
     middleware:[thunk]
 });
 
-console.log(store.getState())
+ console.log(store.getState())
 
 
  const persistor  = persistStore(store);

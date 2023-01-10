@@ -4,7 +4,7 @@ const isempty = require('is-empty');
 
 module.exports = function (req,res,next) {
 
-    let errors = null;
+    let errors = {};
 
     req.user.name = !(isempty(req.user.name)) ? req.user.name : "";
     req.user.password = !(isempty(req.user.password))? req.user.password: "";
@@ -13,11 +13,9 @@ module.exports = function (req,res,next) {
 
 
 //  Name checks
-if(!isempty(req.user.name)){
-  if(validate.isEmpty(req.user.name)){
-    errors.name = "Name field is required";
-  }
-}
+if(req.user.name)
+  if(isempty(req.user.name))
+    errors.name  = "Name is required";
 
 // email checks 
  if(validate.isEmpty(req.user.email)){
@@ -35,7 +33,7 @@ if(validate.isEmpty(req.user.password)){
 else if(!validate.isLength(req.user.password,{min:6, max: 10})){
     errors.password = "Password must be at least 6 characters";
 }
-if(!isempty(req.user.confirmpassword)){
+if(req.user.confirmpassword){
  if(!validate.equals(req.user.password,req.user.confirmpassword)){
      errors.password2 = "Password must match";
 }

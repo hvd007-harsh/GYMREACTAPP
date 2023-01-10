@@ -43,7 +43,7 @@ Router.post("/product/submit",async(req,res)=>{
                 const userId = isAuth(req);
                 const Userdata =await user.findOne({_id:userId});
                
-            
+                console.log(req.file);
                 const image = req.file.filename;
                 if(userId !== null){
                 const productsubmit = req.body;
@@ -80,7 +80,7 @@ Router.post("/product/submit",async(req,res)=>{
                 const message = err.message;
                 const message2 =  message.split("/t");
                 const filename = message2[1];
-                
+                console.log(message2[0]);
                 fs.rm(("public/image/"+filename),()=>{
                     console.log(filename+" file is deleted");
                 });

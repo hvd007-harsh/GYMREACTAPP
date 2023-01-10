@@ -31,13 +31,13 @@ const submit = ()=>{
  }
   return (
     <div>
-      <Box>
-        <Card>
-          <form className="flex-wrap padding-6 bg-orange h-full">
+      <Box className="h-96">
+        <Card >
+          <form className=" padding-6 mb-29 bg-gray-dark text-gray h-full">
             <div className="field m-4">
               <label
                 htmlFor="{Product Name}"
-                className="float-left  font-semibold font-200 text-Navy"
+                className="float-left  font-semibold font-200"
               >
                 Name:
               </label>
@@ -57,7 +57,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product Author}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200"
               >
                 Author:
               </label>
@@ -76,7 +76,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product imgUri}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200 "
               >
                 Image:
               </label>
@@ -97,7 +97,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product Description}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200 "
               >
                 Product Discription:
               </label>
@@ -117,7 +117,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product color}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200"
               >
                 Color:
               </label>
@@ -134,7 +134,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="outlined-adornment-amount"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200 "
               >
                 Amount:
               </label>
@@ -152,7 +152,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product Size}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200 "
               >
                 Size:
               </label>
@@ -172,7 +172,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product Offer}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200 "
               >
                 Offer:
               </label>
@@ -191,7 +191,7 @@ const submit = ()=>{
             <div className="field m-4">
               <label
                 htmlFor="{Product Stock}"
-                className="float-left font-semibold font-200 text-Navy"
+                className="float-left font-semibold font-200 "
               >
                 Stock:
               </label>

@@ -21,9 +21,9 @@ const Register = ()=>{
       password,
       confirmpassword
     };
-   const data =  Axios.post('/user/register',user);
+   const data = Axios.post('/user/register',user);
    data.then(response =>{
-    console.log(response.data);
+    console.log(response);
     setmessage(response.data.message);
     if(response.data.success){
       navigate('/login');   
@@ -77,7 +77,6 @@ const Register = ()=>{
                           value={name}
                           placeholder="Username"
                           onChange={(e)=>{setName(e.target.value)}}
-                          id="exampleFormControlInput1"
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
                         />
                       </div>
@@ -88,7 +87,6 @@ const Register = ()=>{
                           placeholder="Email"
                           value={email}
                           onChange={(e)=>{setEmail(e.target.value)}}
-                          id="exampleFormControlInput1"
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
                         />
                       </div>
@@ -98,7 +96,6 @@ const Register = ()=>{
                           value={confirmpassword}
                           onChange={(e)=>{setConfirmPassword(e.target.value)}}
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
-                          id="exampleFormControlInput1"
                           placeholder="Confirm Password"
                         />
                       </div>
@@ -108,7 +105,6 @@ const Register = ()=>{
                           value={password}
                           onChange={(e)=>{setPassword(e.target.value)}}
                           className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-light bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-gray-light focus:border-blue-600 focus:outline-none"
-                          id="exampleFormControlInput1"
                           placeholder="Password"
                         />
                       </div>

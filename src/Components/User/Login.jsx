@@ -19,7 +19,7 @@ const Login = () => {
   const [password, setpassword ] = useState('Harsh@111');
 
 //function for form submitting
-  const submit = ()=>{
+  const submit =async ()=>{
     const user = {
        email,
        password
@@ -31,8 +31,8 @@ const Login = () => {
 
 
   const Response= Axios.post('/user/login',user);
-  console.log(Response);
-  Response.then((response)=>{  
+  Response.then((response)=>{
+    console.log(response);  
     setMessage(response.data.message);
      const accesstoken = response.data.accesstoken;
       if(accesstoken){

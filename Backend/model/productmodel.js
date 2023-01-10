@@ -10,8 +10,7 @@ const ProductSchema = mongoose.Schema({
        type:String,
     },
     size:{
-        type:Number,
-        require:true
+        type:String,
     },
     author:{
        type:String,
@@ -35,11 +34,9 @@ const ProductSchema = mongoose.Schema({
     },
     rating:{
         type:Number,
-        require:true,
     },
     comment:{
         type:String,
-        require:true
     },
     stock:{
         type:Number,

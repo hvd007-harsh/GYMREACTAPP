@@ -22,20 +22,19 @@ Route.post("/login", async (req, res, next) => {
     req.user = req.body;
     const { email, password } = req.user;
     var val = validate(req, res, next);
-    console.log(val.errors)
-     if(val.errors){ throw new Error (val.errors)}
+    console.log(val)
+     if(!(val.isValid)){ throw new Error (val.errors) }
     if (val.isValid) {
       const User = await user.findOne({
         email
       });
-
+      console.log(User);
       var checkpass = await compare(password, User.Password);
       if (!checkpass) {
         throw new Error("Password did not match");
       }
       const Accesstoken = accesstokengen(User._id);
       const Refreshtoken = refreshtokengen(User._id);
-     
       // await user.updateOne({_id:User._id},{
       //   refreshtoken: Refreshtoken
       // },()=>{
@@ -43,13 +42,14 @@ Route.post("/login", async (req, res, next) => {
       //   res.send({status:202});
       // })
       User.refreshtoken = Refreshtoken;
-      await User.save();
+      await User.save(err=> console.log(err));
       //Sending Refresh token
       sendrefreshtoken(res, Refreshtoken);
 
       sendaccesstoken(req, res, Accesstoken);
     }
   } catch (error) {
+    console.log('error');
     res.send({message:error.message});
   }
 });
@@ -59,6 +59,7 @@ Route.post("/login", async (req, res, next) => {
 
 Route.post("/register", async (req, res, next) => {
   try {
+    console.log(req.body);
     req.user = req.body;
     var { name, email, password, confirmpassword } = req.user;
     name = name.trim();
@@ -68,21 +69,23 @@ Route.post("/register", async (req, res, next) => {
     confirmpassword =confirmpassword.trim();
 
     var val = validate(req, res, next);
+    console.log(val.isValid);
 
     if (val.isValid) {
       const User = await user.find({
-        email,
+        email
       });
+      console.log('enter');
 
       if (User[0]) {
         throw new Error("User already exist");
 
       }
-
+      console.log(User[0],'user');
       const Password = await hash(password, 10);
       console.log(Password);
       const data = new user({name,email,Password});
-      await data.save();
+      await data.save(err => console.log(err));
 
       res.send({
         status: 201,
@@ -91,6 +94,7 @@ Route.post("/register", async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.log(error);
     res.send({message:error.message});
   }
 });
@@ -145,8 +149,10 @@ Route.post("/refresh_token", async (req, res) => {
 Route.post("/makeofgymwebsiteadmin", async(req, res) => {
   try {
     const userId = isAuth(req);
-    if (userId !== null) {
+     console.log(userId);
+    if (userId) {
       const User= await user.findById(userId);
+      console.log(User);
       User.role = true;
       await User.save();
       res.send({

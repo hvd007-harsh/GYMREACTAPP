@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Cart from './Components/Cart/Cart';
 import Login from './Components/User/Login';
 import Register from './Components/User/Register';
+import CheckIn from './Components/Cart/CheckIn';
 //Redux part
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
@@ -45,8 +46,9 @@ function App() {
         <Route element={<Login/>} path={"/login"}/>
         <Route element={<Register/>} path={"/register"}/>
         <Route element={<Protected Component={AdminDashboard}/>} path={"/admin/dashboard"}/>
+        <Route element={<Protected Component={CheckIn}/>} path="/addtocart" />
       </Routes>
-    <Footer/>
+      <Footer/>
     </BrowserRouter>
     </CookiesProvider>
     </PersistGate>
